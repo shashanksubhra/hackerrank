@@ -1,0 +1,72 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the repeatedString function below.
+    static long repeatedString(String s, long n) {
+        int charCount = s.length();
+        long temp, count= 0;
+       // int r =0;
+        try{
+           
+            if( charCount== 1 && s == "a"){
+                count = n;
+            }else{
+                if(s.contains("a")){
+                    for(int i=0;i<charCount;i++){
+                        if(s.charAt(i)=='a'){
+                            count++;//2
+                        
+                        }
+                    }
+                    temp = (n/charCount);//2
+                    count *= temp;
+                    if(n%charCount != 0){
+                        
+                        // count *= temp;
+                        //r= ((int)n%charCount);//n=200 cC=70 temp=2 r=60
+                       // System.out.println(n%charCount);
+                        for(int i=0;i<n%charCount;i++){
+                            if(s.charAt(i)=='a'){
+                                count++;
+                            }
+                        }
+                    }
+
+                }
+            }
+        // System.out.println(charCount);
+            System.out.print(count);
+        }catch (StringIndexOutOfBoundsException e){
+            System.out.print(count);
+        }
+        return count;
+
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String s = scanner.nextLine();
+
+        long n = scanner.nextLong();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        long result = repeatedString(s, n);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
